@@ -1,0 +1,8 @@
+[ADD]catf1/rangeFac=1 : catf1/vol=0.1/pitch=1
+[ADD]catf2/rangeFac=1 : catf2/vol=0.1/pitch=1
+[ADD]meow1/rangeFac=1 : meow2/vol=0.3/pitch=1
+[ADD]meow2/rangeFac=1 : meow2/vol=0.2/pitch=1
+[ADD]meow3/rangeFac=1 : meow3/vol=0.2/pitch=1
+[ADD]purrr1/rangeFac=1 : purrr2/vol=0.7/pitch=1
+[ADD]purrr2/rangeFac=1 : purrr2/vol=0.3/pitch=1
+
