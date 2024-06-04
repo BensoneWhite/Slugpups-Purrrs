@@ -15,4 +15,6 @@ global using Menu.Remix.MixedUI;
 global using BepInEx.Logging;
 global using Menu;
 
+#pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+#pragma warning restore CS0618 // Type or member is obsolete

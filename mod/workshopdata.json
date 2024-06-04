@@ -2,13 +2,16 @@
   "Title": "SlugpupsPurrs",
   "Description": "Purrrr~~ Purrr~~ Purrr~~\r\n\r\nThey are little invaders, now they are Purrrpups!",
   "ID": "SlugpupsPurrs",
-  "Version": "1.2",
-  "TargetGameVersion": "v1.9.06",
+  "Version": "1.2.1",
+  "TargetGameVersion": "v1.9.15b",
   "Requirements": "",
   "RequirementNames": "",
   "Authors": "BensoneWhite",
   "Visibility": "Public",
-  "Tags": [],
+  "Tags": [
+    "Game Mechanics",
+    "Cosmetics"
+  ],
   "WorkshopID": 2961803489,
   "UploadFilesOnly": true,
   "UploadThumbnail": false
