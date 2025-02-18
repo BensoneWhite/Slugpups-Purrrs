@@ -1,7 +1,5 @@
 ﻿global using System;
-global using System.IO;
 global using System.Security.Permissions;
-global using System.Collections.Generic;
 global using System.Linq;
 global using RWCustom;
 global using UnityEngine;
@@ -17,4 +15,3 @@ global using Menu;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-#pragma warning restore CS0618 // Type or member is obsolete

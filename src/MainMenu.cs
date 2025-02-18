@@ -33,10 +33,10 @@ public class MainMenu
         ILCursor cursor = new(il);
         try
         {
-            if (!cursor.TryGotoNext((MoveType)2, new Func<Instruction, bool>[1]
-            {
+            if (!cursor.TryGotoNext((MoveType)2,
+            [
                 (Instruction i) => ILPatternMatchingExt.MatchLdcI4(i, 8)
-            }))
+            ]))
             {
                 Plugin.Error($"Failed to load Meow Button from {Plugin.MOD_NAME}, {Plugin.VERSION}");
             }

@@ -13,13 +13,12 @@ public class MeowEnums
         Purr = new SoundID("purrr1", register: true);
         Meow = new SoundID("meow1", register: true);
 
-        Meows = new SoundID[5]
-        {
-        new("meow2", register: true),
-        new("meow3", register: true),
-        new("catf1", register: true),
-        new("catf2", register: true),
-        new("purrr2", register: true)
-        };
+        Meows = [
+            new("meow2", register: true),
+            new("meow3", register: true),
+            new("catf1", register: true),
+            new("catf2", register: true),
+            new("purrr2", register: true)
+        ];
     }
 }
