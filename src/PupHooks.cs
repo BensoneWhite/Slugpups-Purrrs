@@ -2,9 +2,9 @@
 
 public class PupHooks
 {
-    public static ConditionalWeakTable<Player, ChunkDynamicSoundLoop> PurrrMeows = new();
+    public static ConditionalWeakTable<Player, ChunkDynamicSoundLoop> PlayerSoundLoops = new();
 
-    public static bool MeowOrMeownt;
+    public static bool IsMeowing;
 
     public static void Init()
     {
@@ -15,81 +15,77 @@ public class PupHooks
         On.Player.Update += Player_Update;
     }
 
-    private static void Player_Update(On.Player.orig_Update orig, Player self, bool eu)
+    private static void Player_Update(On.Player.orig_Update orig, Player player, bool eu)
     {
-        orig(self, eu);
-        Room ruuuuuum = self.room;
+        orig(player, eu);
+        Room room = player.room;
         try
         {
-            if (PurrrMeows.TryGetValue(self, out var meow) && ruuuuuum != null && !self.dead && !PurrrrMix.DisablePurrrOnBack.Value)
+            if (PlayerSoundLoops.TryGetValue(player, out var soundLoop) && room != null && !player.dead && !PurrrrMix.DisablePurrrOnBack.Value)
             {
-                if (self.slugOnBack != null && 
-                    self.slugOnBack.slugcat != null && 
-                    self.slugOnBack.slugcat.isNPC && 
-                    !self.isNPC)
+                if (player.slugOnBack != null &&
+                    player.slugOnBack.slugcat != null &&
+                    player.slugOnBack.slugcat.isNPC &&
+                    !player.isNPC)
                 {
-                    MeowOrMeownt = true;
+                    IsMeowing = true;
                 }
 
-                if (MeowOrMeownt && !ruuuuuum.game.GamePaused) meow.Volume = 0.4f;
-                else meow.Volume = 0f;
-                meow.Update();
+                soundLoop.Volume = IsMeowing && !room.game.GamePaused ? 0.4f : 0f;
+                soundLoop.Update();
             }
         }
         catch (Exception e)
         {
-            Plugin.Error($"Something went wrong on Player Update {Plugin.MOD_NAME}, {Plugin.VERSION}");
+            Plugin.Error($"Error during Player Update in {Plugin.MOD_NAME}, {Plugin.VERSION}");
             Debug.LogException(e);
         }
     }
 
-    private static void Player_ThrowObject(On.Player.orig_ThrowObject orig, Player self, int grasp, bool eu)
+    private static void Player_ThrowObject(On.Player.orig_ThrowObject orig, Player player, int grasp, bool eu)
     {
         if (!PurrrrMix.DisableMeowThrow.Value)
         {
-            PhysicalObject grabbed = self.grasps[grasp].grabbed;
-            Player purrrpup = (Player)((grabbed is Player) ? grabbed : null);
-            if (purrrpup != null && (purrrpup.isNPC || purrrpup.isSlugpup) && !self.dead)
+            PhysicalObject grabbedObject = player.grasps[grasp].grabbed;
+            Player grabbedPlayer = grabbedObject as Player;
+            if (grabbedPlayer != null && (grabbedPlayer.isNPC || grabbedPlayer.isSlugpup) && !player.dead)
             {
-                self.room.PlaySound(MeowEnums.Meow, self.mainBodyChunk);
+                player.room.PlaySound(MeowEnums.Meow, player.mainBodyChunk);
             }
         }
-        orig(self, grasp, eu);
+        orig(player, grasp, eu);
     }
 
-    private static void Player_ctor(On.Player.orig_ctor orig, Player self, AbstractCreature abstractCreature, World world)
+    private static void Player_ctor(On.Player.orig_ctor orig, Player player, AbstractCreature abstractCreature, World world)
     {
-        orig(self, abstractCreature, world);
-        if (!self.isSlugpup)
+        orig(player, abstractCreature, world);
+        if (!player.isSlugpup)
         {
-            ChunkDynamicSoundLoop meower;
-            meower = new ChunkDynamicSoundLoop(self.bodyChunks[0])
+            var soundLoop = new ChunkDynamicSoundLoop(player.bodyChunks[0])
             {
                 sound = MeowEnums.Purr,
                 Pitch = 1f
             };
-            PurrrMeows.Add(self, meower);
+            PlayerSoundLoops.Add(player, soundLoop);
         }
     }
 
-    private static void SlugOnBack_SlugToBack(On.Player.SlugOnBack.orig_SlugToBack orig, SlugOnBack self, Player playerToBack)
+    private static void SlugOnBack_SlugToBack(On.Player.SlugOnBack.orig_SlugToBack orig, SlugOnBack slugOnBack, Player playerToBack)
     {
-        orig(self, playerToBack);
+        orig(slugOnBack, playerToBack);
         if (playerToBack.isNPC && !PurrrrMix.DisableMeowThrow.Value)
         {
-            self.owner.room.PlaySound(MeowEnums.Meow, self.owner.bodyChunks[0]);
+            slugOnBack.owner.room.PlaySound(MeowEnums.Meow, slugOnBack.owner.bodyChunks[0]);
         }
     }
 
-    private static void SlugOnBack_Update(On.Player.SlugOnBack.orig_Update orig, SlugOnBack self, bool eu)
+    private static void SlugOnBack_Update(On.Player.SlugOnBack.orig_Update orig, SlugOnBack slugOnBack, bool eu)
     {
-        orig(self, eu);
+        orig(slugOnBack, eu);
 
-        bool meow0 = self.owner.grasps[0] != null && self.owner.grasps[0].grabbed is Player;
-        bool meow1 = self.owner.grasps[1] != null && self.owner.grasps[1].grabbed is Player;
+        bool isGraspingPlayer0 = slugOnBack.owner.grasps[0] != null && slugOnBack.owner.grasps[0].grabbed is Player;
+        bool isGraspingPlayer1 = slugOnBack.owner.grasps[1] != null && slugOnBack.owner.grasps[1].grabbed is Player;
 
-        if (meow0) MeowOrMeownt = true;
-        else if (meow1) MeowOrMeownt = true;
-        else MeowOrMeownt = false;
+        IsMeowing = isGraspingPlayer0 || isGraspingPlayer1;
     }
 }

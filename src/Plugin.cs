@@ -1,20 +1,18 @@
 ﻿namespace SlugpupPurrs;
 
 [BepInPlugin(GUID: MOD_ID, Name: MOD_NAME, Version: VERSION)]
-class Plugin : BaseUnityPlugin
+public class Plugin : BaseUnityPlugin
 {
     public const string AUTHORS = "BensoneWhite";
     public const string MOD_ID = "slugpupspurr";
     public const string MOD_NAME = "SlugpupsPurr";
-    public const string VERSION = "1.0.1";
+    public const string VERSION = "1.4.1";
 
     public bool IsInit;
 
     public static void Warning(object ex) => Logger.LogWarning(ex);
 
     public static void Error(object ex) => Logger.LogError(ex);
-
-    public static void Log(object ex) => Logger.LogInfo(ex);
 
     public static new ManualLogSource Logger;
 

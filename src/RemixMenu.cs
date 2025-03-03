@@ -6,6 +6,7 @@ public class PurrrrMix : OptionInterface
     public static Configurable<bool> DisableMeowThrow;
     public static Configurable<bool> DisablePurrrOnBack;
     public static Configurable<bool> EnableCleaningpups;
+    public static Configurable<bool> DisableWhiskers;
 
     public PurrrrMix()
     {
@@ -13,6 +14,7 @@ public class PurrrrMix : OptionInterface
         DisableMeowThrow = config.Bind("DisableMeowThrow", false);
         DisablePurrrOnBack = config.Bind("DisablePurrrOnBack", false);
         EnableCleaningpups = config.Bind("EnableCleaningpups", false);
+        DisableWhiskers = config.Bind("DisableWhiskers", false);
     }
 
     public override void Initialize()
@@ -25,7 +27,6 @@ public class PurrrrMix : OptionInterface
         AddOptionItems(optab1);
     }
 
-    //Change this for later
     private void AddOptionItems(OpTab optab)
     {
         optab.AddItems(
@@ -36,7 +37,9 @@ public class PurrrrMix : OptionInterface
             new OpCheckBox(DisablePurrrOnBack, 10f, 460f),
             new OpLabel(45f, 460f, "Disable purrrr on back"),
             new OpCheckBox(EnableCleaningpups, 10f, 420f),
-            new OpLabel(45f, 420f, "Enable the Electric death sprites")
+            new OpLabel(45f, 420f, "Cleaning Pups"),
+            new OpCheckBox(DisableWhiskers, 10f, 380f),
+            new OpLabel(45f, 380f, "Disable Whiskers")
         );
     }
 }
