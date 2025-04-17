@@ -6,7 +6,7 @@ public class Plugin : BaseUnityPlugin
     public const string AUTHORS = "BensoneWhite";
     public const string MOD_ID = "slugpupspurr";
     public const string MOD_NAME = "SlugpupsPurr";
-    public const string VERSION = "1.4.1";
+    public const string VERSION = "1.4.2";
 
     public bool IsInit;
 

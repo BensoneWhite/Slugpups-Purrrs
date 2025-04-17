@@ -3,7 +3,6 @@ global using System.Security.Permissions;
 global using System.Linq;
 global using RWCustom;
 global using UnityEngine;
-global using Mono.Cecil.Cil;
 global using MonoMod.Cil;
 global using Random = UnityEngine.Random;
 global using BepInEx;

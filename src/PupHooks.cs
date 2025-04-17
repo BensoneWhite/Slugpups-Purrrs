@@ -44,11 +44,10 @@ public class PupHooks
 
     private static void Player_ThrowObject(On.Player.orig_ThrowObject orig, Player player, int grasp, bool eu)
     {
-        if (!PurrrrMix.DisableMeowThrow.Value)
+        if (!PurrrrMix.DisableMeow.Value)
         {
             PhysicalObject grabbedObject = player.grasps[grasp].grabbed;
-            Player grabbedPlayer = grabbedObject as Player;
-            if (grabbedPlayer != null && (grabbedPlayer.isNPC || grabbedPlayer.isSlugpup) && !player.dead)
+            if (grabbedObject is Player grabbedPlayer && (grabbedPlayer.isNPC || grabbedPlayer.isSlugpup) && !player.dead)
             {
                 player.room.PlaySound(MeowEnums.Meow, player.mainBodyChunk);
             }
@@ -73,7 +72,7 @@ public class PupHooks
     private static void SlugOnBack_SlugToBack(On.Player.SlugOnBack.orig_SlugToBack orig, SlugOnBack slugOnBack, Player playerToBack)
     {
         orig(slugOnBack, playerToBack);
-        if (playerToBack.isNPC && !PurrrrMix.DisableMeowThrow.Value)
+        if (playerToBack.isNPC && !PurrrrMix.DisableMeow    .Value)
         {
             slugOnBack.owner.room.PlaySound(MeowEnums.Meow, slugOnBack.owner.bodyChunks[0]);
         }

@@ -3,7 +3,7 @@
 public class PurrrrMix : OptionInterface
 {
     public static Configurable<bool> DisableMeowButton;
-    public static Configurable<bool> DisableMeowThrow;
+    public static Configurable<bool> DisableMeow;
     public static Configurable<bool> DisablePurrrOnBack;
     public static Configurable<bool> EnableCleaningpups;
     public static Configurable<bool> DisableWhiskers;
@@ -11,7 +11,7 @@ public class PurrrrMix : OptionInterface
     public PurrrrMix()
     {
         DisableMeowButton = config.Bind("DisableMeowButton", false);
-        DisableMeowThrow = config.Bind("DisableMeowThrow", false);
+        DisableMeow = config.Bind("DisableMeowThrow", false);
         DisablePurrrOnBack = config.Bind("DisablePurrrOnBack", false);
         EnableCleaningpups = config.Bind("EnableCleaningpups", false);
         DisableWhiskers = config.Bind("DisableWhiskers", false);
@@ -32,7 +32,7 @@ public class PurrrrMix : OptionInterface
         optab.AddItems(
             new OpCheckBox(DisableMeowButton, 10f, 540f),
             new OpLabel(45f, 540f, "Disable Meow Button"),
-            new OpCheckBox(DisableMeowThrow, 10f, 500f),
+            new OpCheckBox(DisableMeow, 10f, 500f),
             new OpLabel(45f, 500f, "Disable Meow on throw"),
             new OpCheckBox(DisablePurrrOnBack, 10f, 460f),
             new OpLabel(45f, 460f, "Disable purrrr on back"),

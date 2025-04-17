@@ -2,30 +2,22 @@
 
 public class Whiskers
 {
-    public class PurrrWhiskers
+    public class PurrrWhiskers(Player player)
     {
         public bool Purring { get; set; } = false;
         public int InitialFaceWhiskerLoc { get; set; }
         public string Sprite { get; set; } = "LizardScaleA0";
         public string FaceSprite { get; set; } = "LizardScaleA0";
-        public WeakReference<Player> PlayerRef { get; }
+        public WeakReference<Player> PlayerRef { get; } = new(player);
         public Vector2[] HeadPositions { get; } = new Vector2[6];
         public Scale[] HeadScales { get; } = new Scale[6];
 
-        public PurrrWhiskers(Player player)
-        {
-            PlayerRef = new(player);
-        }
+        public int GetFaceWhiskerSpriteIndex(int side, int pair) => InitialFaceWhiskerLoc + side + pair + pair;
 
-        public int GetFaceWhiskerSpriteIndex(int side, int pair) =>
-            InitialFaceWhiskerLoc + side + pair + pair;
-
-        public class Scale : BodyPart
+        public class Scale(GraphicsModule cosmetics) : BodyPart(cosmetics)
         {
             public float Length = 5f;
             public float Width = 1f;
-
-            public Scale(GraphicsModule cosmetics) : base(cosmetics) { }
 
             public override void Update()
             {

@@ -33,21 +33,20 @@ public class MainMenu
         ILCursor cursor = new(il);
         try
         {
-            if (!cursor.TryGotoNext((MoveType)2,
-            [
-                (Instruction i) => ILPatternMatchingExt.MatchLdcI4(i, 8)
-            ]))
+            if (cursor.TryGotoNext(MoveType.After, [i => i.MatchLdcI4(8)] ))
+            {
+                cursor.MoveAfterLabels();
+                cursor.EmitDelegate((int _) => 12);
+            }
+            else
             {
                 Plugin.Error($"Failed to load Meow Button from {Plugin.MOD_NAME}, {Plugin.VERSION}");
             }
-            cursor.MoveAfterLabels();
-            cursor.EmitDelegate((int _) => 12);
         }
         catch (Exception ex)
         {
-            Plugin.Error("Exception when matching IL for MainMenu_ctor1!");
-            Debug.LogException(ex);
-            Plugin.Error(ex);
+            Plugin.Error("Exception when matching IL for MainMenu_ctor1!" + ex);
+            throw;
         }
     }
 }
